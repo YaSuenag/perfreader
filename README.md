@@ -1,9 +1,8 @@
-# PerfReader
 Parser for HotSpot jvmstat performance counter (hsperfdata)
 
 # How to Build
 
-```shell
+```
 $ export JAVA_HOME=/path/to/jdk
 $ ant
 ```
@@ -12,15 +11,15 @@ $ ant
 
 * Save hsperfdata file
 
-```shell
+```
 $ java -XX:+PerfDataSaveToFile -XX:PerfDataSaveFile=<filename> ...
 ```
 
 * Parse saved hsperfdata
+    * `perfreader.sh` requires `$JAVA_HOME` .
 
-```shell
-$ cd dist
-$ java -jar perfreader.jar <hsperfdata>
+```
+$ perfreader.sh [hsperfdata]
 ```
 
 # License
