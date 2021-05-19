@@ -40,7 +40,7 @@
     <jar destfile="${dist.dir}/perfreader.jar">
       <zipfileset dir="${build.dir}" excludes=".gitkeep"/>
       <manifest>
-        <attribute name="Main-Class" value="jp.dip.ysfactory.perfreader.Main"/>
+        <attribute name="Main-Class" value="com.yasuenag.perfreader.Main"/>
       </manifest>
     </jar>
   </target>

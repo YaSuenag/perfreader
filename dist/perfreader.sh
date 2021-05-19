@@ -25,7 +25,7 @@ fi
 JAVA_VERSION=`$JAVA_HOME/bin/java -version 2>&1 | head -n 1 | sed -e 's/^.\+"\([0-9]\+\)\.\?.*$/\1/'`
 
 BASEDIR=`dirname $0`
-MAIN_CLASS=jp.dip.ysfactory.perfreader.Main
+MAIN_CLASS=com.yasuenag.perfreader.Main
 
 if [ $JAVA_VERSION -eq 1 ]; then
   TOOLS_JAR=$JAVA_HOME/lib/tools.jar

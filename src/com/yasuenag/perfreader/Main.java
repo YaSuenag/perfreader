@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016, 2017, Yasumasa Suenaga
+ * Copyright (C) 2016, 2021, Yasumasa Suenaga
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
-package jp.dip.ysfactory.perfreader;
+package com.yasuenag.perfreader;
 
 import java.nio.file.Paths;
 
