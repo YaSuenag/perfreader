@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (C) 2021, Yasumasa Suenaga
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+  MA 02110-1301, USA.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yasuenag</groupId>
+    <artifactId>perfreader</artifactId>
+    <version>0.3.0</version>
+    <name>PerfReader</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                        <arg>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader</arg>
+                        <arg>--add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jlink-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <classifier>${package.os.name}-${os.arch}</classifier>
+                    <addModules>
+                        <addModule>jdk.internal.jvmstat</addModule>
+                    </addModules>
+                    <addOptions>
+                        <addOption>--add-exports jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader</addOption>
+                        <addOption>--add-exports jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</addOption>
+                    </addOptions>
+                    <compress>2</compress>
+                    <launcher>perfreader=perfreader/com.yasuenag.perfreader.Main</launcher>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
+                    <stripDebug>true</stripDebug>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jlink</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jlink</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>linux</id>
+            <activation>
+                <os>
+                    <name>Linux</name>
+                </os>
+            </activation>
+            <properties>
+                <package.os.name>linux</package.os.name>
+                <shell.ext/>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <package.os.name>windows</package.os.name>
+            </properties>
+        </profile>
+    </profiles>
+</project>

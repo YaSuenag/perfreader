@@ -1,10 +1,18 @@
 Parser for HotSpot jvmstat performance counter (hsperfdata)
 
+
 # How to Build
+
+## Requirements
+
+* JDK 16 or later
+* Maven 3.6.3 or later
+
+## Build
 
 ```
 $ export JAVA_HOME=/path/to/jdk
-$ ant
+$ mvn package
 ```
 
 # How to use
@@ -16,13 +24,11 @@ $ java -XX:+PerfDataSaveToFile -XX:PerfDataSaveFile=<filename> ...
 ```
 
 * Parse saved hsperfdata
-    * `perfreader.sh` requires `$JAVA_HOME` .
 
 ```
-$ perfreader.sh [hsperfdata]
+$ perfreader [hsperfdata]
 ```
 
 # License
 
 GNU General Public License v2
-
