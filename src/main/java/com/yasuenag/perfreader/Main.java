@@ -26,8 +26,7 @@ public class Main{
   public static void main(String[] args) throws Exception{
 
     if(args.length != 1){
-      System.out.println("Usage:");
-      System.out.println("  java -jar perfreader.jar <hsperfdata file>");
+      System.err.println("Please pass 1 hsperfdata file to the argument.");
       System.exit(1);
     }
 
