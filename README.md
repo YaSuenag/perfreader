@@ -1,5 +1,6 @@
 Parser for HotSpot jvmstat performance counter (hsperfdata)
-
+![CodeQL](../../workflows/CodeQL/badge.svg)
+===================
 
 # How to Build
 
