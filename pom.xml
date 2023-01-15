@@ -137,7 +137,7 @@
             <id>mac</id>
             <activation>
                 <os>
-                    <familye>mac</family>
+                    <family>mac</family>
                 </os>
             </activation>
             <properties>
