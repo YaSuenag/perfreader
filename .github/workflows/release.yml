@@ -30,21 +30,25 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '16'
+          java-version: '21'
           cache: 'maven'
 
       - name: 'Run Maven'
-        run: mvn -B package
+        run: mvn -B -DskipTests package
 
-      - name: 'Setup environment variables for release'
+      - if: matrix.os == 'ubuntu-latest'
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: Build for Linux AArch64
         run: |
-          ASSET=$(find target/ -name 'perfreader*.zip')
-          echo "ASSET=$ASSET" >> $GITHUB_ENV
-        shell: bash
+          rm -fR target/perfreader-*/
+          docker run -it --rm -v .:/workspace:Z arm64v8/maven:3.9-eclipse-temurin-21 bash -c 'cd /workspace && mvn -B -DskipTests package'
 
       - name: 'Upload Release Asset'
-        uses: AButler/upload-release-assets@v2.0
+        uses: AButler/upload-release-assets@v3.0
         with:
           release-tag: ${{ github.ref_name }}
-          files: ${{ env.ASSET }}
+          files: "target/perfreader-*.zip"
           repo-token: ${{ github.token }}
