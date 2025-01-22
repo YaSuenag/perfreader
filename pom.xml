@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Copyright (C) 2021, 2024, Yasumasa Suenaga
+  Copyright (C) 2021, 2025, Yasumasa Suenaga
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -32,8 +32,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <imageName>${project.artifactId}-${project.version}</imageName>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
     </properties>
 
     <build>
@@ -68,12 +68,7 @@
                                 <argument>${project.build.outputDirectory}</argument>
                                 <argument>--add-modules</argument>
                                 <argument>perfreader</argument>
-                                <argument>--add-options</argument>
-                                <!--
-                                    add-option does not accept argument which stats with '\-\-',
-                                    so HeapDumpOnOutOfMemoryError is added to the top of args to avoid it.
-                                -->
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError --add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader --add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</argument>
+                                <argument>--add-options=--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader --add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</argument>
                                 <argument>--launcher</argument>
                                 <argument>${project.artifactId}=perfreader/com.yasuenag.perfreader.Main</argument>
                                 <argument>--output</argument>
