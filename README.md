@@ -6,7 +6,7 @@ Parser for HotSpot jvmstat performance counter (hsperfdata)
 
 ## Requirements
 
-* JDK 21 or later
+* JDK 25 or later
 * Maven 3.6.3 or later
 
 ## Build
