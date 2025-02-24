@@ -28,6 +28,7 @@
     <artifactId>perfreader</artifactId>
     <version>0.3.2</version>
     <name>PerfReader</name>
+    <packaging>jlink</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,54 +51,30 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>jlink</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>${java.home}/bin/jlink</executable>
-                            <arguments>
-                                <argument>--module-path</argument>
-                                <argument>${project.build.outputDirectory}</argument>
-                                <argument>--add-modules</argument>
-                                <argument>perfreader</argument>
-                                <argument>--add-options=--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader --add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</argument>
-                                <argument>--launcher</argument>
-                                <argument>${project.artifactId}=perfreader/com.yasuenag.perfreader.Main</argument>
-                                <argument>--output</argument>
-                                <argument>${project.build.directory}/${project.build.finalName}</argument>
-                                <argument>--no-header-files</argument>
-                                <argument>--no-man-pages</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <artifactId>maven-jlink-plugin</artifactId>
+                <version>3.2.1-SNAPSHOT</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/distribution.xml</descriptor>
-                    </descriptors>
-                    <attach>false</attach>
+                    <zipDirPrefix>${project.build.finalName}/</zipDirPrefix>
+                    <classifier>${package.os.name}-${os.arch}</classifier>
+                    <addOptions>
+                        <option>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader</option>
+                        <option>--add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</option>
+                    </addOptions>
+                    <launcher>${project.artifactId}=perfreader/com.yasuenag.perfreader.Main</launcher>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
+                    <additionalResources>
+                        <additionalResource>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>README.md</include>
+                                <include>LICENSE</include>
+                            </includes>
+                        </additionalResource>
+                    </additionalResources>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
