@@ -31,7 +31,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <imageName>${project.artifactId}-${project.version}</imageName>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
     </properties>
@@ -72,7 +71,7 @@
                                 <argument>--launcher</argument>
                                 <argument>${project.artifactId}=perfreader/com.yasuenag.perfreader.Main</argument>
                                 <argument>--output</argument>
-                                <argument>${project.build.directory}/${imageName}</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}</argument>
                                 <argument>--no-header-files</argument>
                                 <argument>--no-man-pages</argument>
                             </arguments>
