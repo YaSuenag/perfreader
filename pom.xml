@@ -28,10 +28,10 @@
     <artifactId>perfreader</artifactId>
     <version>0.3.2</version>
     <name>PerfReader</name>
+    <packaging>jlink</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <imageName>${project.artifactId}-${project.version}</imageName>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
     </properties>
@@ -54,27 +54,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jlink-plugin</artifactId>
                 <version>3.2.1-SNAPSHOT</version>
-                <executions>
-                    <execution>
-                        <id>jlink</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jlink</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <extensions>true</extensions>
                 <configuration>
-                    <zipDirPrefix>${imageName}/</zipDirPrefix>
+                    <zipDirPrefix>${project.build.finalName}/</zipDirPrefix>
                     <classifier>${package.os.name}-${os.arch}</classifier>
-                    <modulePaths>
-                        <modulePath>${project.build.outputDirectory}</modulePath>
-                    </modulePaths>
-                    <addModules>
-                        <addModule>perfreader</addModule>
-                    </addModules>
                     <addOptions>
-                        <addOption>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader</addOption>
-                        <addOption>--add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</addOption>
+                        <option>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=perfreader</option>
+                        <option>--add-exports=jdk.internal.jvmstat/sun.jvmstat.perfdata.monitor=perfreader</option>
                     </addOptions>
                     <launcher>${project.artifactId}=perfreader/com.yasuenag.perfreader.Main</launcher>
                     <noHeaderFiles>true</noHeaderFiles>
