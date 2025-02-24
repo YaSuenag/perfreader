@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Copyright (C) 2021, 2024, Yasumasa Suenaga
+  Copyright (C) 2021, 2025, Yasumasa Suenaga
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -31,7 +31,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <imageName>${project.artifactId}-${project.version}</imageName>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
@@ -77,7 +76,7 @@
                                 <argument>--launcher</argument>
                                 <argument>${project.artifactId}=perfreader/com.yasuenag.perfreader.Main</argument>
                                 <argument>--output</argument>
-                                <argument>${project.build.directory}/${imageName}</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}</argument>
                                 <argument>--no-header-files</argument>
                                 <argument>--no-man-pages</argument>
                             </arguments>
