@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Copyright (C) 2021, 2025, Yasumasa Suenaga
+  Copyright (C) 2021, 2026, Yasumasa Suenaga
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jlink-plugin</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>3.3.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <zipDirPrefix>${project.build.finalName}/</zipDirPrefix>
